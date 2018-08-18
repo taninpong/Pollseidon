@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.Text;
 using pollseidon.facade.DAC;
 using pollseidon.Models;
+using pollseidon.models.ViewModels;
 
 namespace pollseidon.facade.Facade
 {
     public class Facade : IFacade
     {
         private IDac dac;
+
+
         public Facade(IDac dac)
         {
             this.dac = dac;
@@ -58,14 +61,39 @@ namespace pollseidon.facade.Facade
             return poll.ToList();
         }
 
-        IEnumerable<Topic> IFacade.GetMyPoll(string username)
+        IEnumerable<TopicVM> IFacade.GetMyPoll(string username)
         {
-            throw new NotImplementedException();
+            var poll = dac.GetTopicList(x => x.CreateBy == username).ToList();
+            return ConvertToTopicVM(poll.ToList());
         }
 
-        IEnumerable<Topic> IFacade.GetPoll()
+        IEnumerable<TopicVM> IFacade.GetPoll()
         {
-            throw new NotImplementedException();
+            var poll = dac.GetTopicList(x => true).ToList();
+            return ConvertToTopicVM(poll.ToList());
+        }
+
+
+        List<TopicVM> ConvertToTopicVM(List<Topic> topic)
+        {
+            return topic.Select(x => new TopicVM()
+            {
+                id = x.id,
+                TopicName = x.TopicName,
+                CreateBy = x.CreateBy,
+                CreateDate = x.CreateDate,
+                ChoiceList = x.ChoiceList.Select(c => new ChoiceVM()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    CraeteBy = c.CraeteBy,
+                    CraeteDate = c.CraeteDate,
+                    Rating = 0,
+                    VoteCount = 0,
+                    VoteList = new List<VoteVM>(),
+                }).ToList(),
+                VoteCount = 0,
+            }).ToList();
         }
     }
 }
