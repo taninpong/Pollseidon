@@ -45,6 +45,12 @@ namespace pollseidon.facade.Facade
             topic.id = newid;
             topic.CreateDate = now;
             topic.CreateBy = username;
+            topic.VoteList = new List<Vote>();
+
+            if (topic.ChoiceList.Count() == 0)
+            {
+                topic.ChoiceList = new List<Choice>();
+            }
 
             dac.CreateTopic(topic);
         }
@@ -64,7 +70,7 @@ namespace pollseidon.facade.Facade
         IEnumerable<TopicVM> IFacade.GetMyPoll(string username)
         {
             var poll = dac.GetTopicList(x => x.CreateBy == username).ToList();
-            if (poll.Count >0 )
+            if (poll.Count > 0)
             {
                 return ConvertToTopicVM(poll.ToList());
             }
@@ -72,7 +78,6 @@ namespace pollseidon.facade.Facade
             {
                 return new List<TopicVM>();
             }
-          
         }
 
         IEnumerable<TopicVM> IFacade.GetPoll()
@@ -109,6 +114,30 @@ namespace pollseidon.facade.Facade
                 }).ToList(),
                 VoteCount = 0,
             }).ToList();
+        }
+
+        public TopicVM GetPollById(string id)
+        {
+            var poll = dac.GetTopic(x => x.id == id);
+
+            return new TopicVM(){
+                id = poll.id,
+                TopicName = poll.TopicName,
+                CreateBy = poll.CreateBy,
+                CreateDate = poll.CreateDate,
+                ChoiceList = poll.ChoiceList.Select(c => new ChoiceVM()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    CraeteBy = c.CraeteBy,
+                    CraeteDate = c.CraeteDate,
+                    Rating = 0,
+                    VoteCount = 0,
+                    VoteList = new List<VoteVM>(),
+                }).ToList(),
+                VoteCount = 0,
+            };
+
         }
     }
 }

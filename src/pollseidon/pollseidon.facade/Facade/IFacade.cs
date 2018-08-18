@@ -13,5 +13,6 @@ namespace pollseidon.facade.Facade
         void AddChoice(Choice choice, string topicId, string username);
         IEnumerable<TopicVM> GetPoll();
         IEnumerable<TopicVM> GetMyPoll(string username);
+        TopicVM GetPollById(string id);
     }
 }
