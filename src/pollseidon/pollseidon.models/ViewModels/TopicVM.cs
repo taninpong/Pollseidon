@@ -11,7 +11,7 @@ namespace pollseidon.models.ViewModels
         public string CreateBy { get; set; }
         public DateTime CreateDate { get; set; }
         public IEnumerable<ChoiceVM> ChoiceList { get; set; }
-        public IEnumerable<VoteVM> VoteList { get; set; }
         public int VoteCount { get; set; }
+    
     }
 }
