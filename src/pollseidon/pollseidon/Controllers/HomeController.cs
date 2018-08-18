@@ -72,12 +72,20 @@ namespace pollseidon.Controllers
 
         public IActionResult AddChoice(string topicId)
         {
-            return View();
+            var model = new AddChoiceVM { TopicId = topicId };
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult AddChoice(string topicId, object choice)
+        public IActionResult AddChoice(string topicId, AddChoiceVM choice)
         {
+            var data = new Choice {
+                Name = choice.ChoiceName,
+                CraeteBy = username,
+                CraeteDate = DateTime.Now,
+                Id = Guid.NewGuid().ToString()
+            };
+            facade.AddChoice(data, topicId, username);
             return RedirectToAction(nameof(Vote));
         }
 
