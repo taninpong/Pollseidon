@@ -11,5 +11,6 @@ namespace pollseidon.models.ViewModels
         public string CraeteBy { get; set; }
         public DateTime CraeteDate { get; set; }
         public double Rating { get; set; }
+        public IEnumerable<VoteVM> VoteList { get; set; }
     }
 }
