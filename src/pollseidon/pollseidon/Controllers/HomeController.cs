@@ -39,9 +39,7 @@ namespace pollseidon.Controllers
         {
             return View();
         }
-
-        public 
-
+   
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
