@@ -4,13 +4,19 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using pollseidon.facade.Facade;
 using pollseidon.Models;
 
 namespace pollseidon.Controllers
 {
     public class HomeController : Controller
     {
+        public Facade facade;
         public static string username;
+        public HomeController(Facade _facade)
+        {
+            facade = _facade;
+        }
 
         public IActionResult Index()
         {
@@ -26,6 +32,13 @@ namespace pollseidon.Controllers
 
         public IActionResult Topics()
         {
+            var model = facade.GetPoll();
+            return View();
+        }
+
+        public IActionResult MyTopics()
+        {
+            var model = facade.GetMyPoll(username);
             return View();
         }
 
@@ -35,8 +48,15 @@ namespace pollseidon.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTopic(object topic)
+        public IActionResult CreateTopic(Topic topic)
         {
+            topic.id = Guid.NewGuid().ToString();
+            topic.CreateDate = DateTime.Now;
+            topic.CreateBy = username;
+            topic.TopicName = topic.TopicName;
+            if (!string.IsNullOrEmpty(topic.TopicName))
+                topic.ChoiceList = new List<Choice> { new Choice { Id = Guid.NewGuid().ToString(), Name = topic.TopicName } };
+            facade.CreateTopic(topic, username);
             return RedirectToAction(nameof(Topics));
         }
 
@@ -54,7 +74,7 @@ namespace pollseidon.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult AddChoice(string topicId, object choice)
         {
