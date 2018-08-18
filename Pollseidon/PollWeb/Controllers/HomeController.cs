@@ -10,7 +10,21 @@ namespace PollWeb.Controllers
 {
     public class HomeController : Controller
     {
+        public static string username;
+
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(string UsernameInput)
+        {
+            username = UsernameInput;
+            return RedirectToAction(nameof(Main));
+        }
+
+        public IActionResult Main()
         {
             return View();
         }
