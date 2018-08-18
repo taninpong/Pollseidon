@@ -15,6 +15,33 @@ namespace pollseidon.Controllers
             return View();
         }
 
+        public IActionResult Topics()
+        {
+            return View();
+        }
+
+        public IActionResult CreateTopic()
+        {
+            return View();
+        }
+
+        public IActionResult Vote()
+        {
+            return View();
+        }
+
+        public IActionResult AddChoice()
+        {
+            return View();
+        }
+
+        public IActionResult ViewVote()
+        {
+            return View();
+        }
+
+        public 
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
