@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\pollseidon.facade\pollseidon.facade.csproj" />
+    <ProjectReference Include="..\pollseidon.models\pollseidon.models.csproj" />
   </ItemGroup>
 
 </Project>

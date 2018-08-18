@@ -10,6 +10,8 @@ namespace pollseidon.Controllers
 {
     public class HomeController : Controller
     {
+        public static string username;
+
         public IActionResult Index()
         {
             return View();
@@ -18,6 +20,7 @@ namespace pollseidon.Controllers
         [HttpPost]
         public IActionResult Index(string Username)
         {
+            username = Username;
             return RedirectToAction(nameof(Topics));
         }
 
