@@ -11,9 +11,9 @@ namespace pollseidon.Controllers
 {
     public class HomeController : Controller
     {
-        public Facade facade;
+        public IFacade facade;
         public static string username;
-        public HomeController(Facade _facade)
+        public HomeController(IFacade _facade)
         {
             facade = _facade;
         }
