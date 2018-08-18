@@ -1,15 +1,16 @@
-﻿@{
+﻿@model pollseidon.Models.CreateTopicVM
+@{
     ViewData["Title"] = "CreateTopic";
 }
 
-<div>
+<form method="post">
     </br>
 
     <h3>Topic Name</h3></br>
-    <input type="text" class="form-control btn-block" placeholder="Topic Name" name="Topic Name" aria-describedby="basic-addon2">
+    <input asp-for="TopicName" type="text" class="form-control btn-block" placeholder="Topic Name" name="Topic Name" aria-describedby="basic-addon2">
     </br>
 
-    <a class="btn btn-block btn-primary" asp-action"Topics">Add Choice</a></br>
-    <input type="text" class="form-control btn-block" placeholder="Add Choice" name="Add Choice">
-    <a class="btn btn-block btn-warning" asp-action"Topics">Done</a>
-</div>
+    <h3>ตัวเลือกแรก (ถ้ามี)</h3>
+    <input asp-for="FChoiceName" type="text" class="form-control btn-block" placeholder="Add Choice" name="Add Choice">
+    <button class="btn btn-block btn-warning" type="submit">Done</button>
+</form>

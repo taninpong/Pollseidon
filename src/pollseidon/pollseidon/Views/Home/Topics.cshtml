@@ -1,42 +1,45 @@
-﻿@{
+﻿@model List<pollseidon.models.ViewModels.TopicVM>
+@{
     ViewData["Title"] = "Toppics";
 }
 
 <div class="col-md-12" style="margin-top:5px">
-    <a class=" pull-right btn-primary btn ">+ Add Topic</a>
+    <a class=" pull-right btn-primary btn " asp-action="CreateTopic">+ Add Topic</a>
 </div>
 
 
 
 
-<div class="tab" style="margin-top:50px" >
+<div class="tab" style="margin-top:50px">
     <button class="tablinks " onclick="openCity(event, 'London')">All Poll</button>
     <button class="tablinks" onclick="openCity(event, 'Paris')">My Poll</button>
 </div>
 
 <div id="London" class="tabcontent ">
     <div style="background-color:white">
-        <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
-            <label>Toppic Name AAA</label><br />
-            <label>Create by : Username1</label>
-        </div><br /><br />
-        <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
-            <label>Toppic Name BBB</label><br />
-            <label>Create by : Username2</label>
-        </div><br /><br /><br />
-        <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
-            <label>Toppic Name CCC</label><br />
-            <label>Create by : Username3</label>
-        </div><br /><br /><br /><br />
+        @foreach (var item in Model)
+        {
+            <a asp-action="Vote">
+                <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
+                    <label>@item.TopicName</label><br />
+                    <label>Create by : @item.CreateBy</label>
+                </div><br /><br />
+            </a>
+        }
     </div>
 </div>
 
 
 <div id="Paris" class="tabcontent">
-    <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
-        <label>Toppic Name AAA</label><br />
-        <label>Create by : Username1</label>
-    </div><br /><br /><br />
+    @foreach (var item in Model.Where(it => it.CreateBy == ViewBag.username))
+    {
+        <a asp-action="Vote">
+            <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
+                <label>@item.TopicName</label><br />
+                <label>Create by : @item.CreateBy</label>
+            </div><br /><br />
+        </a>
+    }
 </div>
 
 

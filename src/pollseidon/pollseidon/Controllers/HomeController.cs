@@ -32,14 +32,9 @@ namespace pollseidon.Controllers
 
         public IActionResult Topics()
         {
+            ViewBag.username = username;
             var model = facade.GetPoll();
-            return View();
-        }
-
-        public IActionResult MyTopics()
-        {
-            var model = facade.GetMyPoll(username);
-            return View();
+            return View(model);
         }
 
         public IActionResult CreateTopic()
@@ -48,15 +43,13 @@ namespace pollseidon.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTopic(Topic topic)
+        public IActionResult CreateTopic(CreateTopicVM topic)
         {
-            topic.id = Guid.NewGuid().ToString();
-            topic.CreateDate = DateTime.Now;
-            topic.CreateBy = username;
-            topic.TopicName = topic.TopicName;
-            if (!string.IsNullOrEmpty(topic.TopicName))
-                topic.ChoiceList = new List<Choice> { new Choice { Id = Guid.NewGuid().ToString(), Name = topic.TopicName } };
-            facade.CreateTopic(topic, username);
+            var data = new Topic { TopicName = topic.TopicName, ChoiceList = new List<Choice> { } };
+
+            if (!string.IsNullOrEmpty(topic.FChoiceName))
+                data.ChoiceList = new List<Choice> { new Choice { Id = Guid.NewGuid().ToString(), Name = topic.TopicName } };
+            facade.CreateTopic(data, username);
             return RedirectToAction(nameof(Topics));
         }
 
