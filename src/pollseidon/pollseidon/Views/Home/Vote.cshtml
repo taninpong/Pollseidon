@@ -1,28 +1,48 @@
-﻿
+﻿@model pollseidon.models.ViewModels.TopicVM
 @{
     ViewData["Title"] = "Vote";
 }
 
 <h3>Topic Name</h3>
-<input type="text" class="form-control btn-block" placeholder="Topic Name" name="Topic Name" aria-describedby="basic-addon2">
-<a class="btn btn-block btn-primary" asp-action"Topics">Add Choice</a></br>
-<label>All Vote  0</label>
+<input type="text" class="form-control btn-block" value="@Model.TopicName" name="Topic Name" aria-describedby="basic-addon2" disabled>
+<a class="btn btn-block btn-primary" asp-action="AddChoice" asp-route-topicId="@Model.id">Add Choice</a></br>
+<label>All Vote  @Model.VoteCount</label>
 <div class="col-md-12">
-    <div class="col-md-1">
-        <a>
-            <input type="radio" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><br>
-        </a>
-    </div>
-    <div class="col-md-10">
-        <label>1. Choice AAA</label><br />
-        <p class="glyphicon glyphicon-star"></p>
-        <p class="glyphicon glyphicon-star"></p>
-        <p class="glyphicon glyphicon-star"></p>
-    </div>
-    <div class="col-md-1 center-block">
-        <label>7</label><br />
-        <label>View</label>
-    </div>
+    @foreach (var item in Model.ChoiceList)
+    {
+        <div class="col-md-1">
+            <a>
+                <input type="radio" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><br>
+            </a>
+        </div>
+        <div class="col-md-10">
+            <label>@item.Name</label><br />
+            @if (item.Rating >= 1)
+            {
+                <p class="glyphicon glyphicon-star"></p>
+            }
+            @if (item.Rating >= 2)
+            {
+                <p class="glyphicon glyphicon-star"></p>
+            }
+            @if (item.Rating >= 3)
+            {
+                <p class="glyphicon glyphicon-star"></p>
+            }
+            @if (item.Rating >= 4)
+            {
+                <p class="glyphicon glyphicon-star"></p>
+            }
+            @if (item.Rating == 5)
+            {
+                <p class="glyphicon glyphicon-star"></p>
+            }
+        </div>
+        <div class="col-md-1 center-block">
+            <label>@item.VoteCount</label>
+            <a asp-action="ViewVote" asp-route-topicId="@Model.id" asp-route-choiceId="@item.Id">View</a>
+        </div>
+    }
 </div><br /><br />
 <hr />
 

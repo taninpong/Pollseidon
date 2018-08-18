@@ -55,7 +55,8 @@ namespace pollseidon.Controllers
 
         public IActionResult Vote(string TopicId)
         {
-            return View();
+            var model = facade.GetPollById(TopicId);
+            return View(model);
         }
 
         public IActionResult SendVote()
@@ -79,7 +80,7 @@ namespace pollseidon.Controllers
                 Id = Guid.NewGuid().ToString()
             };
             facade.AddChoice(data, topicId, username);
-            return RedirectToAction(nameof(Vote));
+            return RedirectToAction(nameof(Vote), new { TopicId = topicId });
         }
 
         public IActionResult ViewVote(string topicId, string choiceId)

@@ -41,7 +41,7 @@
         <div id="Paris" class="tabcontent">
             @foreach (var item in Model.Where(it => it.CreateBy == ViewBag.username))
             {
-                <a asp-action="Vote">
+                <a asp-action="Vote" asp-route-topicId="@item.id">
                     <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
                         <label style="color:black">@item.TopicName</label><br />
                         <label style="color:black">Create by : @item.CreateBy</label>
