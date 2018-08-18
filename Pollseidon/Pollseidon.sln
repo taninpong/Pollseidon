@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pollseidon", "Pollseidon\Pollseidon.csproj", "{56AEE5D1-2BFC-460C-B3DE-D3E4FA8C3A98}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnixtestPollseidon", "UnixtestPollseidon\UnixtestPollseidon.csproj", "{16AC20D2-A323-4675-B2A9-952C40C66251}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56AEE5D1-2BFC-460C-B3DE-D3E4FA8C3A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56AEE5D1-2BFC-460C-B3DE-D3E4FA8C3A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56AEE5D1-2BFC-460C-B3DE-D3E4FA8C3A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56AEE5D1-2BFC-460C-B3DE-D3E4FA8C3A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16AC20D2-A323-4675-B2A9-952C40C66251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16AC20D2-A323-4675-B2A9-952C40C66251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16AC20D2-A323-4675-B2A9-952C40C66251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16AC20D2-A323-4675-B2A9-952C40C66251}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8D641BE-C247-4CA9-85C0-F4DA0495A270}
+	EndGlobalSection
+EndGlobal
