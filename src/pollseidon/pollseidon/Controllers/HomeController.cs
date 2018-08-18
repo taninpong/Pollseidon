@@ -40,7 +40,7 @@ namespace pollseidon.Controllers
             return View();
         }
 
-        public 
+
 
         public IActionResult About()
         {

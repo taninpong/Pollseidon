@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using pollseidon.facade.DAC;
-using pollseidon.facade.Models;
+using pollseidon.Models;
 
 namespace pollseidon.facade.Facade
 {
@@ -56,6 +56,16 @@ namespace pollseidon.facade.Facade
         {
             var poll = dac.GetTopicList(x => true).ToList();
             return poll.ToList();
+        }
+
+        IEnumerable<Topic> IFacade.GetMyPoll(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Topic> IFacade.GetPoll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

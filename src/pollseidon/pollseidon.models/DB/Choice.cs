@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace pollseidon.facade.Models
+namespace pollseidon.Models
 {
     public class Choice
     {
