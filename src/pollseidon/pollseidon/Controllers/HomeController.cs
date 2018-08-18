@@ -15,6 +15,12 @@ namespace pollseidon.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Index(string Username)
+        {
+            return RedirectToAction(nameof(Topics));
+        }
+
         public IActionResult Topics()
         {
             return View();
@@ -25,26 +31,48 @@ namespace pollseidon.Controllers
             return View();
         }
 
-        public IActionResult Vote()
+        [HttpPost]
+        public IActionResult CreateTopic(object topic)
+        {
+            return RedirectToAction(nameof(Topics));
+        }
+
+        public IActionResult Vote(string TopicId)
         {
             return View();
         }
 
-        public IActionResult AddChoice()
+        public IActionResult SendVote()
+        {
+            return RedirectToAction(nameof(Vote));
+        }
+
+        public IActionResult AddChoice(string topicId)
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult AddChoice(string topicId, object choice)
+        {
+            return RedirectToAction(nameof(Vote));
+        }
+
+        public IActionResult ViewVote(string topicId, string choiceId)
         {
             return View();
         }
 
-        public IActionResult ViewVote()
-        {
-            return View();
-        }
-   
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
 
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Contact()
