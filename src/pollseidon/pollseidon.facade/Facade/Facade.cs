@@ -64,13 +64,28 @@ namespace pollseidon.facade.Facade
         IEnumerable<TopicVM> IFacade.GetMyPoll(string username)
         {
             var poll = dac.GetTopicList(x => x.CreateBy == username).ToList();
-            return ConvertToTopicVM(poll.ToList());
+            if (poll.Count >0 )
+            {
+                return ConvertToTopicVM(poll.ToList());
+            }
+            else
+            {
+                return new List<TopicVM>();
+            }
+          
         }
 
         IEnumerable<TopicVM> IFacade.GetPoll()
         {
             var poll = dac.GetTopicList(x => true).ToList();
-            return ConvertToTopicVM(poll.ToList());
+            if (poll.Count > 0)
+            {
+                return ConvertToTopicVM(poll.ToList());
+            }
+            else
+            {
+                return new List<TopicVM>();
+            }
         }
 
 
