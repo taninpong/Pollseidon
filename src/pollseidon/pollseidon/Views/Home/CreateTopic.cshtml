@@ -1,19 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "CreateTopic";
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <form method="post">
-        </br>
-        <h3>Topic Name</h3></br>
-        <input type="text" class="form-control btn-block" placeholder="Topic Name" name="Topic Name" aria-describedby="basic-addon2">
-        </br></br>
-        <a type="submit" class="btn btn-block btn-primary" asp-action"Topics">Add Choice</a>
-        <input type="text" class="form-control btn-block" placeholder="Add Choice" name="Add Choice" aria-describedby="basic-addon2">
-        <input type="text" class="form-control btn-block" placeholder="Add Choice" name="Add Choice" aria-describedby="basic-addon2">
-        <input type="text" class="form-control btn-block" placeholder="Add Choice" name="Add Choice" aria-describedby="basic-addon2">
-        <input type="text" class="form-control btn-block" placeholder="Add Choice" name="Add Choice" aria-describedby="basic-addon2">
-        <a type="submit" class="btn btn-block btn-primary" asp-action"Topics">Done</a>
-    </form>  
-    
+<div>
+    </br>
+
+    <h3>Topic Name</h3></br>
+    <input type="text" class="form-control btn-block" placeholder="Topic Name" name="Topic Name" aria-describedby="basic-addon2">
+    </br>
+
+    <a class="btn btn-block btn-primary" asp-action"Topics">Add Choice</a></br>
+    <input type="text" class="form-control btn-block" placeholder="Add Choice" name="Add Choice">
+    <a class="btn btn-block btn-warning" asp-action"Topics">Done</a>
 </div>
