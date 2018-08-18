@@ -2,30 +2,58 @@
     ViewData["Title"] = "Toppics";
 }
 
-<div class="col-md-12">
-    <a class=" pull-right btn-primary">+ Add Topic</a>
+<div class="col-md-12" style="margin-top:5px">
+    <a class=" pull-right btn-primary btn ">+ Add Topic</a>
 </div>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <a class=" btn-block btn-primary text-center" style="font-size:20px">All Poll</a>
-    </div>
-    <div class="col-md-6">
-        <a class=" btn-block btn-primary text-center" style="color:gray;font-size:20px">My Poll</a>
-    </div>
 
+
+
+
+<div class="tab" style="margin-top:50px" >
+    <button class="tablinks " onclick="openCity(event, 'London')">All Poll</button>
+    <button class="tablinks" onclick="openCity(event, 'Paris')">My Poll</button>
 </div>
-<div style="background-color:white">
 
+<div id="London" class="tabcontent ">
+    <div style="background-color:white">
+        <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
+            <label>Toppic Name AAA</label><br />
+            <label>Create by : Username1</label>
+        </div><br /><br />
+        <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
+            <label>Toppic Name BBB</label><br />
+            <label>Create by : Username2</label>
+        </div><br /><br /><br />
+        <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
+            <label>Toppic Name CCC</label><br />
+            <label>Create by : Username3</label>
+        </div><br /><br /><br /><br />
+    </div>
+</div>
+
+
+<div id="Paris" class="tabcontent">
     <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
         <label>Toppic Name AAA</label><br />
         <label>Create by : Username1</label>
-    </div><br /><br />
-    <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
-        <label>Toppic Name BBB</label><br />
-        <label>Create by : Username2</label>
-    </div><br /><br /><br />
-    <div class="col-md-12" style="background-color:lightgray;margin-top:5px">
-    <label>Toppic Name CCC</label><br />
-    <label>Create by : Username3</label>
     </div><br /><br /><br />
 </div>
+
+
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+</script>
