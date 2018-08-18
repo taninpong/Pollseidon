@@ -16,6 +16,7 @@ namespace pollseidon.facade.Facade
         {
             this.dac = dac;
         }
+
         public void AddChoice(Choice choice, string topicId, string username)
         {
             var topic = dac.GetTopic(x => x.id == topicId);
@@ -54,19 +55,7 @@ namespace pollseidon.facade.Facade
             dac.CreateTopic(topic);
         }
 
-        public IEnumerable<Topic> GetMyPoll(string username)
-        {
-            var poll = dac.GetTopicList(x => x.CreateBy == username).ToList();
-            return poll.ToList();
-        }
-
-        public IEnumerable<Topic> GetPoll()
-        {
-            var poll = dac.GetTopicList(x => true).ToList();
-            return poll.ToList();
-        }
-
-        IEnumerable<TopicVM> IFacade.GetMyPoll(string username)
+        public IEnumerable<TopicVM> GetMyPoll(string username)
         {
             var poll = dac.GetTopicList(x => x.CreateBy == username).ToList();
             if (poll.Count > 0)
@@ -79,7 +68,7 @@ namespace pollseidon.facade.Facade
             }
         }
 
-        IEnumerable<TopicVM> IFacade.GetPoll()
+        public IEnumerable<TopicVM> GetPoll()
         {
             var poll = dac.GetTopicList(x => true).ToList();
             if (poll.Count > 0)
@@ -106,11 +95,18 @@ namespace pollseidon.facade.Facade
                     Name = c.Name,
                     CraeteBy = c.CraeteBy,
                     CraeteDate = c.CraeteDate,
-                    Rating = 0,
-                    VoteCount = 0,
-                    VoteList = new List<VoteVM>(),
+                    Rating = x.VoteList.Where(y => y.ChoiceId == c.Id).Average(z => z.Rating).ToString("#,###.00"),
+                    VoteCount = x.VoteList.Where(y => y.ChoiceId == c.Id).Count(),
+                    VoteList = x.VoteList.Where(vote => vote.ChoiceId == c.Id).Select(v => new VoteVM()
+                    {
+                        Id = v.Id,
+                        CreateDate = v.CreateDate,
+                        ChoiceId = v.ChoiceId,
+                        Rating = v.Rating,
+                        UserName = v.UserName
+                    }).ToList(),
                 }).ToList(),
-                VoteCount = 0,
+                VoteCount = x.VoteList.Count(),
             }).ToList();
         }
 
@@ -130,11 +126,18 @@ namespace pollseidon.facade.Facade
                     Name = c.Name,
                     CraeteBy = c.CraeteBy,
                     CraeteDate = c.CraeteDate,
-                    Rating = 0,
-                    VoteCount = 0,
-                    VoteList = new List<VoteVM>(),
+                    Rating = poll.VoteList.Where(y => y.ChoiceId == c.Id).Average(z => z.Rating).ToString("#,###.00"),
+                    VoteCount = poll.VoteList.Where(y => y.ChoiceId == c.Id).Count(),
+                    VoteList = poll.VoteList.Where(vote => vote.ChoiceId == c.Id).Select(v => new VoteVM()
+                    {
+                        Id = v.Id,
+                        CreateDate = v.CreateDate,
+                        ChoiceId = v.ChoiceId,
+                        Rating = v.Rating,
+                        UserName = v.UserName
+                    }).ToList(),
                 }).ToList(),
-                VoteCount = 0,
+                VoteCount = poll.VoteList.Count(),
             };
 
         }
@@ -166,11 +169,11 @@ namespace pollseidon.facade.Facade
                 poll.VoteList = voteList;
                 dac.UpdateTopic(poll);
             }
-        }  
+        }
 
-        IEnumerable<VoteVM> IFacade.GetVoteUserList(string choiceId, string topicId, string username)
+        public IEnumerable<VoteVM> GetVoteUserList(string choiceId, string topicId, string username)
         {
-            var poll = dac.GetTopic(x=>x.id == topicId);
+            var poll = dac.GetTopic(x => x.id == topicId);
 
             return poll.VoteList.Select(x => new VoteVM()
             {
@@ -181,5 +184,7 @@ namespace pollseidon.facade.Facade
                 ChoiceId = x.ChoiceId
             });
         }
+
+
     }
 }

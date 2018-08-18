@@ -12,4 +12,8 @@
     <ProjectReference Include="..\pollseidon.models\pollseidon.models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Engines\" />
+  </ItemGroup>
+
 </Project>
