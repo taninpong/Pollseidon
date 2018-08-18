@@ -9,7 +9,7 @@ namespace pollseidon.facade.Engines
 {
     public class Helpers
     {
-        List<TopicVM> ConvertToTopicVM(List<Topic> topic)
+        public List<TopicVM> ConvertToTopicVM(List<Topic> topic)
         {
             return topic.Select(x => new TopicVM()
             {

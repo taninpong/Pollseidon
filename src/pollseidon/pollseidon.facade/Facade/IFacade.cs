@@ -14,5 +14,7 @@ namespace pollseidon.facade.Facade
         IEnumerable<TopicVM> GetPoll();
         IEnumerable<TopicVM> GetMyPoll(string username);
         TopicVM GetPollById(string id);
+        void VoteAndRating(string choiceId, int rateing, string topicId, string username);
+        IEnumerable<VoteVM> GetVoteUserList(string choiceId, string topicId, string username);
     }
 }

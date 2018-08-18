@@ -12,7 +12,6 @@ namespace pollseidon.facade.Facade
     {
         private IDac dac;
 
-
         public Facade(IDac dac)
         {
             this.dac = dac;
@@ -93,7 +92,6 @@ namespace pollseidon.facade.Facade
             }
         }
 
-
         List<TopicVM> ConvertToTopicVM(List<Topic> topic)
         {
             return topic.Select(x => new TopicVM()
@@ -120,7 +118,8 @@ namespace pollseidon.facade.Facade
         {
             var poll = dac.GetTopic(x => x.id == id);
 
-            return new TopicVM(){
+            return new TopicVM()
+            {
                 id = poll.id,
                 TopicName = poll.TopicName,
                 CreateBy = poll.CreateBy,
@@ -138,6 +137,49 @@ namespace pollseidon.facade.Facade
                 VoteCount = 0,
             };
 
+        }
+
+        public void VoteAndRating(string choiceId, int rating, string topicId, string username)
+        {
+            var poll = dac.GetTopic(x => x.id == topicId);
+
+            var myvote = poll.VoteList.Where(x => x.UserName == username && x.ChoiceId == choiceId).FirstOrDefault();
+            if (myvote != null)
+            {
+                myvote.Rating = rating;
+            }
+            else
+            {
+                var newid = Guid.NewGuid().ToString();
+                var now = DateTime.UtcNow;
+                Vote newvote = new Vote()
+                {
+                    Id = newid,
+                    ChoiceId = choiceId,
+                    CreateDate = now,
+                    Rating = rating,
+                    UserName = username,
+                };
+
+                var voteList = poll.VoteList.ToList();
+                voteList.Add(newvote);
+                poll.VoteList = voteList;
+                dac.UpdateTopic(poll);
+            }
+        }  
+
+        IEnumerable<VoteVM> IFacade.GetVoteUserList(string choiceId, string topicId, string username)
+        {
+            var poll = dac.GetTopic(x=>x.id == topicId);
+
+            return poll.VoteList.Select(x => new VoteVM()
+            {
+                Id = x.Id,
+                Rating = x.Rating,
+                UserName = x.UserName,
+                CreateDate = x.CreateDate,
+                ChoiceId = x.ChoiceId
+            });
         }
     }
 }

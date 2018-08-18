@@ -8,7 +8,7 @@ namespace pollseidon.Models
     {
         public string Id { get; set; }
         public string ChoiceId { get; set; }
-        public string Rating { get; set; }
+        public int Rating { get; set; }
         public string UserName { get; set; }
         public DateTime CreateDate { get; set; }
     }
